@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SearchGithubUsers</string>
+    <string name="label_search_for_user">Search for user on Github</string>
 </resources>
