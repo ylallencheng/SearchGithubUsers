@@ -1,16 +1,15 @@
 package com.ylallencheng.searchgithubusers.ui.search
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
+import dagger.android.support.DaggerAppCompatActivity
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : DaggerAppCompatActivity() {
 
     companion object {
         const val TAG = "SearchActivity"
