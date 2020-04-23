@@ -1,5 +1,6 @@
 package com.ylallencheng.searchgithubusers.io
 
+import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.Json
 import retrofit2.Call
 import retrofit2.http.GET
@@ -20,12 +21,27 @@ interface GithubService {
 /* ------------------------------ API Model */
 
 data class SearchUsersRs(
-    @Json(name = "total_count") val totalCount: Int,
-    @Json(name = "incomplete_results") val incompleteResults: Boolean,
+    @field:Json(name = "total_count") val totalCount: Int,
+    @field:Json(name = "incomplete_results") val incompleteResults: Boolean,
     val items: List<User>
 )
 
 data class User(
-    @Json(name = "login") val username: String?,
-    @Json(name = "avatar_url") val avatarUrl: String?
-)
+    @field:Json(name = "login") val username: String?,
+    @field:Json(name = "avatar_url") val avatarUrl: String?
+) {
+    companion object {
+
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(
+                oldItem: User,
+                newItem: User
+            ): Boolean = oldItem == newItem
+
+            override fun areContentsTheSame(
+                oldItem: User,
+                newItem: User
+            ): Boolean = oldItem.username.equals(newItem.username, ignoreCase = true)
+        }
+    }
+}

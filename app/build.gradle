@@ -57,6 +57,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.fragment:fragment-ktx:1.2.4"
 
+    // Paging
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
     // Unit Test
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

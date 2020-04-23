@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
 import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -31,13 +32,26 @@ class SearchActivity : DaggerAppCompatActivity() {
         binding.textInputEditText.setOnEditorActionListener { v, actionId, _ ->
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    val searchQuery = v.text
+                    val searchQuery = v.text.toString()
                     Log.d(TAG, "search query is: $searchQuery")
+                    viewModel.query.value = searchQuery
                 }
             }
             finishEditing(this)
             true
         }
+
+        binding.recyclerView.adapter = UserAdapter()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.users.observe(
+            this,
+            Observer {
+                (binding.recyclerView.adapter as UserAdapter).submitList(it)
+            })
     }
 
     private fun finishEditing(activity: AppCompatActivity) {
