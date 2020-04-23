@@ -1,6 +1,7 @@
 package com.ylallencheng.searchgithubusers.di
 
 import com.ylallencheng.searchgithubusers.SGUApplication
+import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -12,7 +13,8 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         ActivityModule::class,
-        AppModule::class]
+        AppModule::class,
+        ViewModelFactoryModule::class]
 )
 interface AppComponent : AndroidInjector<SGUApplication> {
 

@@ -10,7 +10,11 @@ import retrofit2.http.Query
 interface GithubService {
 
     @GET("search/users")
-    fun searchUsers(@Query("q") query: String): Call<SearchUsersRs>
+    fun searchUsers(
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("page_limit") pageLimit: Int
+    ): Call<SearchUsersRs>
 }
 
 /* ------------------------------ API Model */

@@ -5,15 +5,22 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
+import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
 class SearchActivity : DaggerAppCompatActivity() {
 
     companion object {
         const val TAG = "SearchActivity"
     }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    val viewModel: SearchViewModel by viewModels { viewModelFactory }
 
     private lateinit var binding: ActivitySearchBinding
 
