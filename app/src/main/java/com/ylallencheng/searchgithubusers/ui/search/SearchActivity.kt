@@ -21,7 +21,7 @@ class SearchActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    val viewModel: SearchViewModel by viewModels { viewModelFactory }
+    private val viewModel: SearchViewModel by viewModels { viewModelFactory }
 
     private lateinit var binding: ActivitySearchBinding
 

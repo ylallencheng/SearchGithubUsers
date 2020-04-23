@@ -8,21 +8,20 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 class GithubRepository @Inject constructor(
-    private val githubService: GithubService
+    private val dataSourceFactory: GithubUserDataSourceFactory,
+    private val pagedListConfig: PagedList.Config
 ) {
+
     fun searchGithubUsers(
         viewModelScope: CoroutineScope,
         query: String
-    ): LiveData<PagedList<User>> {
-        val dataSourceFactory = GithubUserDataSourceFactory(viewModelScope, githubService, query)
-        val dataSourceLiveData = dataSourceFactory.liveDataSource
+    ): LiveData<PagedList<User>> =
+        LivePagedListBuilder(
+            dataSourceFactory.apply {
+                scope(viewModelScope)
+                query(query)
+            },
+            pagedListConfig
+        ).build()
 
-        val config: PagedList.Config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setPageSize(30)
-            .setPrefetchDistance(5)
-            .build()
-
-        return LivePagedListBuilder(dataSourceFactory, config).build()
-    }
 }
