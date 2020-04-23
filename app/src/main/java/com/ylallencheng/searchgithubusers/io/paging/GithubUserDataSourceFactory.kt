@@ -6,12 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 class GithubUserDataSourceFactory @Inject constructor(
-    private val githubUserDataSource: GithubUserDataSource
-) : DataSource.Factory<Int, User>() {
+        private val githubUserDataSource: GithubUserDataSource) : DataSource.Factory<Int, User>() {
 
-    override fun create(): DataSource<Int, User> {
-        return githubUserDataSource
-    }
+    override fun create(): DataSource<Int, User> = githubUserDataSource
 
     fun scope(scope: CoroutineScope) {
         githubUserDataSource.scope = scope

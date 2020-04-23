@@ -23,24 +23,23 @@ class AppModule {
 
         // set HTTP timeout
         val okHttpClientBuilder =
-            OkHttpClient.Builder().apply {
-                connectTimeout(60L, TimeUnit.SECONDS)
-                readTimeout(60L, TimeUnit.SECONDS)
+                OkHttpClient.Builder().apply {
+                    connectTimeout(60L, TimeUnit.SECONDS)
+                    readTimeout(60L, TimeUnit.SECONDS)
 
-                // write log in debug mode
-                if (BuildConfig.DEBUG) {
-                    addInterceptor(HttpLoggingInterceptor().apply {
-                        level = HttpLoggingInterceptor.Level.BODY
-                    })
+                    // write log in debug mode
+                    if (BuildConfig.DEBUG) {
+                        addInterceptor(HttpLoggingInterceptor().apply {
+                            level = HttpLoggingInterceptor.Level.BODY
+                        })
+                    }
                 }
-            }
 
         return Retrofit.Builder()
-            .baseUrl(application.getString(R.string.base_url))
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClientBuilder.build())
-            .build()
-            .create(GithubService::class.java)
+                .baseUrl(application.getString(R.string.base_url))
+                .addConverterFactory(MoshiConverterFactory.create())
+                .client(okHttpClientBuilder.build())
+                .build()
+                .create(GithubService::class.java)
     }
-
 }

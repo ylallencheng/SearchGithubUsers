@@ -48,10 +48,10 @@ class SearchActivity : DaggerAppCompatActivity() {
         super.onResume()
 
         viewModel.users.observe(
-            this,
-            Observer {
-                (binding.recyclerView.adapter as UserAdapter).submitList(it)
-            })
+                this,
+                Observer {
+                    (binding.recyclerView.adapter as UserAdapter).submitList(it)
+                })
     }
 
     private fun finishEditing(activity: AppCompatActivity) {

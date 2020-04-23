@@ -7,21 +7,16 @@ import com.ylallencheng.searchgithubusers.io.paging.GithubUserDataSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
-class GithubRepository @Inject constructor(
-    private val dataSourceFactory: GithubUserDataSourceFactory,
-    private val pagedListConfig: PagedList.Config
-) {
+class GithubRepository @Inject constructor(private val dataSourceFactory: GithubUserDataSourceFactory,
+                                           private val pagedListConfig: PagedList.Config) {
 
-    fun searchGithubUsers(
-        viewModelScope: CoroutineScope,
-        query: String
-    ): LiveData<PagedList<User>> =
-        LivePagedListBuilder(
-            dataSourceFactory.apply {
-                scope(viewModelScope)
-                query(query)
-            },
-            pagedListConfig
-        ).build()
-
+    fun searchGithubUsers(viewModelScope: CoroutineScope,
+                          query: String): LiveData<PagedList<User>> =
+            LivePagedListBuilder(
+                    dataSourceFactory.apply {
+                        scope(viewModelScope)
+                        query(query)
+                    },
+                    pagedListConfig
+            ).build()
 }

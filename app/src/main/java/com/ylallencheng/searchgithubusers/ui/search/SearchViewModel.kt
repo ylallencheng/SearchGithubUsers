@@ -10,7 +10,8 @@ class SearchViewModel @Inject constructor(private val repository: GithubReposito
 
     val query: MutableLiveData<String> = MutableLiveData()
 
-    val users: LiveData<PagedList<User>> = Transformations.switchMap(query) {
-        repository.searchGithubUsers(viewModelScope = viewModelScope, query = it)
-    }
+    val users: LiveData<PagedList<User>> =
+            Transformations.switchMap(query) {
+                repository.searchGithubUsers(viewModelScope = viewModelScope, query = it)
+            }
 }

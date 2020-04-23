@@ -9,10 +9,10 @@ abstract class SearchActivityModule {
 
     @SearchScope
     @ContributesAndroidInjector(
-        modules = [
-            SearchModule::class,
-            SearchViewModelModule::class
-        ]
+            modules = [
+                SearchModule::class,
+                SearchViewModelModule::class
+            ]
     )
     abstract fun contributesSearchActivity(): SearchActivity
 }

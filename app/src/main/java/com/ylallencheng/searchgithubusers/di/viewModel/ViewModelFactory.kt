@@ -6,8 +6,8 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class ViewModelFactory @Inject constructor(
-    private val mViewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
-) : ViewModelProvider.Factory {
+        private val mViewModelMap: Map<Class<out ViewModel>,
+                @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     /* ------------------------------ Override  */
 
