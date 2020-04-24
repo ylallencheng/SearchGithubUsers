@@ -1,5 +1,6 @@
 package com.ylallencheng.searchgithubusers.io
 
+import com.ylallencheng.searchgithubusers.io.model.SearchUsersRs
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -1,4 +1,4 @@
-package com.ylallencheng.searchgithubusers.io
+package com.ylallencheng.searchgithubusers.io.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.Json

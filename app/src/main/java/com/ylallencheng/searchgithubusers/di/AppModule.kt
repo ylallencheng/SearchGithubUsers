@@ -1,6 +1,5 @@
 package com.ylallencheng.searchgithubusers.di
 
-import android.app.Application
 import com.ylallencheng.searchgithubusers.BuildConfig
 import com.ylallencheng.searchgithubusers.R
 import com.ylallencheng.searchgithubusers.SGUApplication

@@ -1,20 +1,26 @@
 package com.ylallencheng.searchgithubusers.io.paging
 
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.Config
 import androidx.paging.DataSource
-import com.ylallencheng.searchgithubusers.io.User
+import androidx.paging.PagedList
+import com.ylallencheng.searchgithubusers.io.GithubService
+import com.ylallencheng.searchgithubusers.io.model.User
 import kotlinx.coroutines.CoroutineScope
+import retrofit2.http.Query
 import javax.inject.Inject
 
-class GithubUserDataSourceFactory @Inject constructor(
-        private val githubUserDataSource: GithubUserDataSource) : DataSource.Factory<Int, User>() {
+class GithubUserDataSourceFactory(private val mService: GithubService,
+                                  private val mContext: Context,
+                                  private val mScope: CoroutineScope,
+                                  private val mQuery: String) : DataSource.Factory<Int, User>() {
 
-    override fun create(): DataSource<Int, User> = githubUserDataSource
+    val dataSourceLiveData = MutableLiveData<GithubUserDataSource>()
 
-    fun scope(scope: CoroutineScope) {
-        githubUserDataSource.scope = scope
-    }
-
-    fun query(query: String) {
-        githubUserDataSource.query = query
+    override fun create(): DataSource<Int, User> {
+        val dataSource = GithubUserDataSource(mService, mContext, mScope, mQuery)
+        dataSourceLiveData.postValue(dataSource)
+        return dataSource
     }
 }

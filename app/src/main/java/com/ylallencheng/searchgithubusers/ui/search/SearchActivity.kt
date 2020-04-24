@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
 import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactory
+import com.ylallencheng.searchgithubusers.io.model.RequestStatus
+import com.ylallencheng.searchgithubusers.io.model.Status
+import com.ylallencheng.searchgithubusers.util.observe
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -34,7 +37,7 @@ class SearchActivity : DaggerAppCompatActivity() {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     val searchQuery = v.text.toString()
                     Log.d(TAG, "search query is: $searchQuery")
-                    viewModel.query.value = searchQuery
+                    viewModel.searchUsers(searchQuery)
                 }
             }
             finishEditing(this)
@@ -47,11 +50,30 @@ class SearchActivity : DaggerAppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.users.observe(
-                this,
-                Observer {
-                    (binding.recyclerView.adapter as UserAdapter).submitList(it)
-                })
+        viewModel.requestStatus.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    Log.d(TAG, "Loading")
+                    binding.contentLoadingProgressBar.visibility = View.VISIBLE
+                }
+                Status.FAILED -> {
+                    Log.d(TAG, "Failed with message: ${it.errorMessage}")
+                    binding.contentLoadingProgressBar.visibility = View.GONE
+                }
+                Status.SUCCESS -> {
+                    Log.d(TAG, "Succeeded")
+                    binding.contentLoadingProgressBar.visibility = View.GONE
+                }
+                Status.REFRESHING -> {
+                    Log.d(TAG, "Refreshing")
+                    binding.contentLoadingProgressBar.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        viewModel.users.observe(this) {
+            (binding.recyclerView.adapter as UserAdapter).submitList(it)
+        }
     }
 
     private fun finishEditing(activity: AppCompatActivity) {
