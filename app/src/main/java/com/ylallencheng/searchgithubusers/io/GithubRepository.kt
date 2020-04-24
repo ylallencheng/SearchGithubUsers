@@ -1,9 +1,7 @@
 package com.ylallencheng.searchgithubusers.io
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.switchMap
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import com.ylallencheng.searchgithubusers.io.model.PagingStatus

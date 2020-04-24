@@ -7,7 +7,8 @@ data class SearchUsersRs(@field:Json(name = "total_count") val totalCount: Int,
                          @field:Json(name = "incomplete_results") val incompleteResults: Boolean,
                          val items: List<User>)
 
-data class User(@field:Json(name = "login") val username: String?,
+data class User(val id: Int,
+                @field:Json(name = "login") val username: String?,
                 @field:Json(name = "avatar_url") val avatarUrl: String?) {
     companion object {
 
@@ -18,7 +19,7 @@ data class User(@field:Json(name = "login") val username: String?,
 
             override fun areContentsTheSame(oldItem: User,
                                             newItem: User): Boolean =
-                    oldItem.username.equals(newItem.username, ignoreCase = true)
+                    oldItem.id == newItem.id
         }
     }
 }

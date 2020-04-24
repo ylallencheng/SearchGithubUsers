@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
 import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactory
@@ -57,19 +59,16 @@ class SearchActivity : DaggerAppCompatActivity() {
         viewModel.requestStatus.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
-                    Log.d(TAG, "Loading")
                     binding.contentLoadingProgressBar.visibility = View.VISIBLE
                 }
                 Status.FAILED -> {
-                    Log.d(TAG, "Failed with message: ${it.errorMessage}")
+                    Toast.makeText(this, it.errorMessage, Toast.LENGTH_LONG).show()
                     binding.contentLoadingProgressBar.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
-                    Log.d(TAG, "Succeeded")
                     binding.contentLoadingProgressBar.visibility = View.GONE
                 }
                 Status.REFRESHING -> {
-                    Log.d(TAG, "Refreshing")
                     binding.contentLoadingProgressBar.visibility = View.VISIBLE
                 }
             }
@@ -88,16 +87,21 @@ class SearchActivity : DaggerAppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        val layoutManager = GridLayoutManager(this, 2).apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    val random = Math.abs(Random(System.currentTimeMillis()).nextInt()) % 2
-                    return random + 1
+        val adapter = UserAdapter()
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                .apply {
+//                    spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+//                        override fun getSpanSize(position: Int): Int =
+//                                when (adapter.getItemViewType(position)) {
+//                                    UserAdapter.VIEW_TYPE_1_ON_1 -> 1
+//                                    else -> 2
+//                                }
+//
+//                        override fun isSpanIndexCacheEnabled(): Boolean = true
+//                    }
                 }
-            }
-        }
 
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = UserAdapter()
+        binding.recyclerView.adapter = adapter
     }
 }
