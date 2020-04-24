@@ -23,8 +23,8 @@ class AppModule {
         // set HTTP timeout
         val okHttpClientBuilder =
                 OkHttpClient.Builder().apply {
-                    connectTimeout(60L, TimeUnit.SECONDS)
-                    readTimeout(60L, TimeUnit.SECONDS)
+                    connectTimeout(5L, TimeUnit.SECONDS)
+                    readTimeout(5L, TimeUnit.SECONDS)
 
                     // write log in debug mode
                     if (BuildConfig.DEBUG) {

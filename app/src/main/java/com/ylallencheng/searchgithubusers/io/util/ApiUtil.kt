@@ -9,13 +9,25 @@ import javax.inject.Inject
 
 object ApiUtil {
 
+    /**
+     * Check whether network is available.
+     *
+     * @param context The App context for getting connectivity system service
+     */
     @Suppress("DEPRECATION")
     fun isNetworkAvailable(context: Context): Boolean {
 
+        /*
+            get connectivity manager from context
+         */
         val connectivityManager =
                 ContextCompat.getSystemService(context, ConnectivityManager::class.java)
                         ?: return false
 
+        /*
+            based on the Android version,
+            there are different ways of checking network availability.
+         */
         when {
             // Android 8 or above
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {

@@ -10,23 +10,35 @@ import com.bumptech.glide.Glide
 import com.ylallencheng.searchgithubusers.databinding.ItemUserBinding
 import com.ylallencheng.searchgithubusers.io.model.User
 
+/**
+ * PagedListAdapter required for RecyclerView pagination
+ */
 class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF_CALLBACK) {
 
     companion object {
+
+        // View Types
         const val VIEW_TYPE_1_ON_1 = 0
         const val VIEW_TYPE_2_ON_1 = 1
         const val VIEW_TYPE_2_ON_2 = 2
     }
 
+    /* ------------------------------ Overrides */
+
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): UserViewHolder {
+        /*
+            inflate view by view binding
+         */
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        if (viewType == VIEW_TYPE_2_ON_1 || viewType == VIEW_TYPE_2_ON_2) {
-            (binding.root.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
-        }
 
+        /*
+            determine corresponding action based on the view type.
+
+            for row spanning requirement, set fullSpan to layout params
+            for column spanning requirement, set height based on item view's width after layout
+         */
         when (viewType) {
-
             VIEW_TYPE_1_ON_1 -> {
                 binding.root.viewTreeObserver.addOnGlobalLayoutListener(
                         object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -58,8 +70,8 @@ class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF
                             }
                         })
             }
-
         }
+
         return UserViewHolder(binding)
     }
 
@@ -75,6 +87,11 @@ class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF
                 else -> VIEW_TYPE_1_ON_1
             }
 
+    /* ------------------------------ View Holder */
+
+    /**
+     * View holder class used for displaying items in recycler view
+     */
     class UserViewHolder(private val mBinding: ItemUserBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(user: User) {
