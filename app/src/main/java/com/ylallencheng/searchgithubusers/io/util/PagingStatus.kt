@@ -1,4 +1,4 @@
-package com.ylallencheng.searchgithubusers.io.model
+package com.ylallencheng.searchgithubusers.io.util
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList

@@ -1,10 +1,11 @@
-package com.ylallencheng.searchgithubusers.io
+package com.ylallencheng.searchgithubusers.io.repository
 
 import android.content.Context
 import androidx.lifecycle.switchMap
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
-import com.ylallencheng.searchgithubusers.io.model.PagingStatus
+import com.ylallencheng.searchgithubusers.io.service.GithubService
+import com.ylallencheng.searchgithubusers.io.util.PagingStatus
 import com.ylallencheng.searchgithubusers.io.model.User
 import com.ylallencheng.searchgithubusers.io.paging.GithubUserDataSourceFactory
 import kotlinx.coroutines.CoroutineScope

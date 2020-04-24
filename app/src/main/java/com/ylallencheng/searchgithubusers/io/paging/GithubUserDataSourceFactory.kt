@@ -2,14 +2,10 @@ package com.ylallencheng.searchgithubusers.io.paging
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.Config
 import androidx.paging.DataSource
-import androidx.paging.PagedList
-import com.ylallencheng.searchgithubusers.io.GithubService
+import com.ylallencheng.searchgithubusers.io.service.GithubService
 import com.ylallencheng.searchgithubusers.io.model.User
 import kotlinx.coroutines.CoroutineScope
-import retrofit2.http.Query
-import javax.inject.Inject
 
 class GithubUserDataSourceFactory(private val mService: GithubService,
                                   private val mContext: Context,

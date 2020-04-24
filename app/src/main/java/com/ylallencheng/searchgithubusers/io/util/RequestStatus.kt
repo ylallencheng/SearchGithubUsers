@@ -1,4 +1,4 @@
-package com.ylallencheng.searchgithubusers.io.model
+package com.ylallencheng.searchgithubusers.io.util
 
 data class RequestStatus(val status: Status,
                          val errorMessage: String? = null)

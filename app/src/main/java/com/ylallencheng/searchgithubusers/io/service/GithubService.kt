@@ -1,4 +1,4 @@
-package com.ylallencheng.searchgithubusers.io
+package com.ylallencheng.searchgithubusers.io.service
 
 import com.ylallencheng.searchgithubusers.io.model.SearchUsersRs
 import retrofit2.http.GET

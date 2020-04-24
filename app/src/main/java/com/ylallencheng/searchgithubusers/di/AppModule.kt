@@ -3,7 +3,7 @@ package com.ylallencheng.searchgithubusers.di
 import com.ylallencheng.searchgithubusers.BuildConfig
 import com.ylallencheng.searchgithubusers.R
 import com.ylallencheng.searchgithubusers.SGUApplication
-import com.ylallencheng.searchgithubusers.io.GithubService
+import com.ylallencheng.searchgithubusers.io.service.GithubService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

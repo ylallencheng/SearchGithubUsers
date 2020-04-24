@@ -2,6 +2,7 @@ package com.ylallencheng.searchgithubusers.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -22,6 +23,42 @@ class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         if (viewType == VIEW_TYPE_2_ON_1 || viewType == VIEW_TYPE_2_ON_2) {
             (binding.root.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+        }
+
+        when (viewType) {
+
+            VIEW_TYPE_1_ON_1 -> {
+                binding.root.viewTreeObserver.addOnGlobalLayoutListener(
+                        object : ViewTreeObserver.OnGlobalLayoutListener {
+                            override fun onGlobalLayout() {
+                                binding.root.layoutParams.height = binding.root.width
+                                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            }
+                        })
+            }
+
+            VIEW_TYPE_2_ON_1 -> {
+                (binding.root.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+                binding.root.viewTreeObserver.addOnGlobalLayoutListener(
+                        object : ViewTreeObserver.OnGlobalLayoutListener {
+                            override fun onGlobalLayout() {
+                                binding.root.layoutParams.height = binding.root.width / 2
+                                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            }
+                        })
+            }
+
+            VIEW_TYPE_2_ON_2 -> {
+                (binding.root.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+                binding.root.viewTreeObserver.addOnGlobalLayoutListener(
+                        object : ViewTreeObserver.OnGlobalLayoutListener {
+                            override fun onGlobalLayout() {
+                                binding.root.layoutParams.height = binding.root.width
+                                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                            }
+                        })
+            }
+
         }
         return UserViewHolder(binding)
     }

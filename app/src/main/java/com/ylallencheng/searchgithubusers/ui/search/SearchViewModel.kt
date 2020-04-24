@@ -3,9 +3,9 @@ package com.ylallencheng.searchgithubusers.ui.search
 import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.ylallencheng.searchgithubusers.SGUApplication
-import com.ylallencheng.searchgithubusers.io.GithubRepository
-import com.ylallencheng.searchgithubusers.io.model.PagingStatus
-import com.ylallencheng.searchgithubusers.io.model.RequestStatus
+import com.ylallencheng.searchgithubusers.io.repository.GithubRepository
+import com.ylallencheng.searchgithubusers.io.util.PagingStatus
+import com.ylallencheng.searchgithubusers.io.util.RequestStatus
 import com.ylallencheng.searchgithubusers.io.model.User
 import javax.inject.Inject
 

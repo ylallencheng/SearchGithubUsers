@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.squareup.moshi.Moshi
-import com.ylallencheng.searchgithubusers.io.GithubService
+import com.ylallencheng.searchgithubusers.io.service.GithubService
 import com.ylallencheng.searchgithubusers.io.model.ErrorRs
-import com.ylallencheng.searchgithubusers.io.model.RequestStatus
-import com.ylallencheng.searchgithubusers.io.model.Status
+import com.ylallencheng.searchgithubusers.io.util.RequestStatus
+import com.ylallencheng.searchgithubusers.io.util.Status
 import com.ylallencheng.searchgithubusers.io.model.User
 import com.ylallencheng.searchgithubusers.io.util.ApiUtil
 import kotlinx.coroutines.CoroutineScope
