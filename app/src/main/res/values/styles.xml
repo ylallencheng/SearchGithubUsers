@@ -1,27 +1,24 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
-        <!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>-->
-        <!--        <item name="colorAccent">@color/colorSecondary</item>-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#757575</item>
+        <item name="colorPrimaryDark">#494949</item>
+        <item name="colorPrimaryVariant">#494949</item>
+        <item name="colorPrimarySurface">#a4a4a4</item>
+        <item name="colorOnPrimary">@android:color/white</item>
 
-        <!--        &lt;!&ndash; Primary Color &ndash;&gt;-->
-        <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>-->
-        <!--        <item name="colorPrimaryVariant">@color/colorOnPrimary</item>-->
-        <!--        <item name="colorOnPrimary">@color/colorOnPrimary</item>-->
+        <item name="colorSecondary">#1976d2</item>
+        <item name="colorSecondaryVariant">#004ba0</item>
+        <item name="colorOnSecondary">@android:color/white</item>
 
-        <!--        &lt;!&ndash; Secondary Color &ndash;&gt;-->
-        <!--        <item name="colorSecondary">@color/colorSecondary</item>-->
-        <!--        <item name="colorOnSecondary">@color/colorSecondary</item>-->
-
-        <!--        &lt;!&ndash; Surface &ndash;&gt;-->
-        <!--        <item name="colorSurface">@color/colorPrimary</item>-->
-        <!--        <item name="colorOnSurface">@color/colorOnPrimary</item>-->
-
-        <!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
 
+    <!-- Toolbar -->
+    <style name="ToolbarStyle" parent="@style/Widget.MaterialComponents.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextColor">?attr/colorOnPrimary</item>
+        <item name="titleTextAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+    </style>
 </resources>
