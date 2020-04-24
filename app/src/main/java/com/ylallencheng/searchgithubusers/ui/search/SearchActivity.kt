@@ -8,13 +8,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ylallencheng.searchgithubusers.databinding.ActivitySearchBinding
 import com.ylallencheng.searchgithubusers.di.viewModel.ViewModelFactory
 import com.ylallencheng.searchgithubusers.io.model.RequestStatus
 import com.ylallencheng.searchgithubusers.io.model.Status
 import com.ylallencheng.searchgithubusers.util.observe
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
+import kotlin.random.Random
 
 class SearchActivity : DaggerAppCompatActivity() {
 
@@ -44,7 +48,7 @@ class SearchActivity : DaggerAppCompatActivity() {
             true
         }
 
-        binding.recyclerView.adapter = UserAdapter()
+        initRecyclerView()
     }
 
     override fun onResume() {
@@ -81,5 +85,19 @@ class SearchActivity : DaggerAppCompatActivity() {
         val currentFocusedView = currentFocus ?: View(activity)
         imm.hideSoftInputFromWindow(currentFocusedView.windowToken, 0)
         currentFocusedView.clearFocus()
+    }
+
+    private fun initRecyclerView() {
+        val layoutManager = GridLayoutManager(this, 2).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val random = Math.abs(Random(System.currentTimeMillis()).nextInt()) % 2
+                    return random + 1
+                }
+            }
+        }
+
+        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.adapter = UserAdapter()
     }
 }
