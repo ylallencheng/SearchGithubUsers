@@ -1,4 +1,4 @@
-package com.ylallencheng.searchgithubusers.io.paging
+package com.ylallencheng.searchgithubusers.io.pagination
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData

@@ -7,7 +7,7 @@ import androidx.paging.toLiveData
 import com.ylallencheng.searchgithubusers.io.service.GithubService
 import com.ylallencheng.searchgithubusers.io.util.PagingStatus
 import com.ylallencheng.searchgithubusers.io.model.User
-import com.ylallencheng.searchgithubusers.io.paging.GithubUserDataSourceFactory
+import com.ylallencheng.searchgithubusers.io.pagination.GithubUserDataSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 

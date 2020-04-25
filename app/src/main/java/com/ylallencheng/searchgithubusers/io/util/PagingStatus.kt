@@ -2,7 +2,7 @@ package com.ylallencheng.searchgithubusers.io.util
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
-import com.ylallencheng.searchgithubusers.io.paging.GithubUserDataSourceFactory
+import com.ylallencheng.searchgithubusers.io.pagination.GithubUserDataSourceFactory
 
 /**
  * This is the wrapped class for handling pagination with retrofit's network status monitoring.
