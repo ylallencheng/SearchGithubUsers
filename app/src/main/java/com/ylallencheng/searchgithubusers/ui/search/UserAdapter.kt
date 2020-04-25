@@ -82,7 +82,7 @@ class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF
     }
 
     override fun getItemViewType(position: Int): Int =
-            when (getItem(position)?.id?.rem(3)) {
+            when (getItem(position)?.randomId) {
                 1 -> VIEW_TYPE_2_ON_1
                 2 -> VIEW_TYPE_2_ON_2
                 else -> VIEW_TYPE_1_ON_1

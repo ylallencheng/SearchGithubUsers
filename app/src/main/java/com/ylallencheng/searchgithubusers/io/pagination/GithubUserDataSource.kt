@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
+import kotlin.math.abs
+import kotlin.random.Random
 
 /**
  * The data source object used for pagination.
@@ -33,6 +35,11 @@ class GithubUserDataSource(private val mService: GithubService,
         RequestStatus LiveData
      */
     val requestStatus: MutableLiveData<RequestStatus> = MutableLiveData()
+
+    /*
+        RandomSeed
+     */
+    private val mRandomSeed = Random(System.currentTimeMillis())
 
     /* ------------------------------ Overrides */
 
@@ -104,7 +111,15 @@ class GithubUserDataSource(private val mService: GithubService,
                     /*
                         callback with the users and next page when it's successful
                      */
-                    callback(rs.items, page + 1)
+                    callback(
+                            rs.items.map {
+                                User(
+                                        id = it.id,
+                                        username = it.username,
+                                        avatarUrl = it.avatarUrl,
+                                        randomId = abs(mRandomSeed.nextInt()) % 3)
+                            },
+                            page + 1)
 
                     /*
                         update the request status to success
@@ -143,7 +158,6 @@ class GithubUserDataSource(private val mService: GithubService,
                 }
             }
 
-
     /**
      * Converting HttpException to ErrorRs to get errorMessage
      */
@@ -153,8 +167,7 @@ class GithubUserDataSource(private val mService: GithubService,
                     get the error buffered source and parse to ErrorRs
                  */
                 e.response()?.errorBody()?.source()?.let {
-                    val moshiAdapter = Moshi.Builder().build().adapter(ErrorRs::class.java)
-                    moshiAdapter.fromJson(it)
+                    Moshi.Builder().build().adapter(ErrorRs::class.java).fromJson(it)
                 }
 
             } catch (e: IOException) {

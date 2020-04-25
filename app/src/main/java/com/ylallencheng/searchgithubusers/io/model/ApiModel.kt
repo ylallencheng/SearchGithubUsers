@@ -2,6 +2,8 @@ package com.ylallencheng.searchgithubusers.io.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.Json
+import kotlin.math.abs
+import kotlin.random.Random
 
 /**
  * The response data model of successful user search request to Github API v3
@@ -16,7 +18,8 @@ data class SearchUsersRs(@field:Json(name = "total_count") val totalCount: Int,
  */
 data class User(val id: Int,
                 @field:Json(name = "login") val username: String?,
-                @field:Json(name = "avatar_url") val avatarUrl: String?) {
+                @field:Json(name = "avatar_url") val avatarUrl: String?,
+                val randomId: Int?) {
 
     companion object {
 
