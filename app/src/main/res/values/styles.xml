@@ -2,16 +2,20 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- Primary Color -->
         <item name="colorPrimary">#757575</item>
         <item name="colorPrimaryDark">#494949</item>
         <item name="colorPrimaryVariant">#494949</item>
         <item name="colorPrimarySurface">#a4a4a4</item>
         <item name="colorOnPrimary">@android:color/white</item>
 
+        <!-- Secondary Color -->
         <item name="colorSecondary">#1976d2</item>
         <item name="colorSecondaryVariant">#004ba0</item>
         <item name="colorOnSecondary">@android:color/white</item>
 
+        <!-- Toolbar Style -->
         <item name="toolbarStyle">@style/ToolbarStyle</item>
     </style>
 

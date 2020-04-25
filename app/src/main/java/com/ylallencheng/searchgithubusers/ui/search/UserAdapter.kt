@@ -7,6 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
+import com.ylallencheng.searchgithubusers.R
 import com.ylallencheng.searchgithubusers.databinding.ItemUserBinding
 import com.ylallencheng.searchgithubusers.io.model.User
 
@@ -96,7 +97,11 @@ class UserAdapter : PagedListAdapter<User, UserAdapter.UserViewHolder>(User.DIFF
 
         fun bind(user: User) {
             mBinding.textViewUsername.text = user.username
-            Glide.with(mBinding.root).load(user.avatarUrl).into(mBinding.imageViewAvatar)
+            Glide
+                    .with(mBinding.root)
+                    .load(user.avatarUrl)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(mBinding.imageViewAvatar)
         }
     }
 }
